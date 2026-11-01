@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagline — Guess the Word</title>
+    <meta name="description" content="A fun word-guessing puzzle game.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <h1>TAGLINE</h1>
+            <p>Guess the Word</p>
+        </div>
+
+        <nav class="navigation">
+            <button class="nav-btn active" data-page="game">
+                ▶ Play Game
+            </button>
+
+            <button class="nav-btn" data-page="rules">
+                Rules
+            </button>
+
+            <button class="nav-btn" data-page="guidelines">
+                Guidelines
+            </button>
+
+            <button class="nav-btn" data-page="tutorial">
+                How to Play
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">Think. Guess. Win!</div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+        <header class="topbar">
+            <div class="stat">
+                ⭐ Score: <span id="score">0</span>
+            </div>
+
+            <div class="stat">
+                Mistakes: <span id="mistakes">0</span>/4
+            </div>
+
+            <button id="sound-btn" class="icon-btn"
+                    aria-label="Toggle sound">
+                🔊
+            </button>
+        </header> 
+              <!-- GAME SCREEN -->
+        <section id="game-page" class="page">
+            <div class="game-card">
+
+                <div class="level">
+                    Level <span id="level">1</span> /
+                    <span id="total-levels">10</span>
+                </div>
+
+                <!-- CLUE -->
+                <div class="hint-card">
+                    <span class="hint-icon">💡</span>
+                    <div>
+                        <strong>Clue</strong>
+                        <p id="question-hint">
+                            A popular social media platform.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ANSWER BOXES -->
+                <div id="answer-boxes"
+                     class="answer-boxes"
+                     aria-label="Answer letters">
+                </div>
+
+                <!-- LETTER WHEEL -->
+                <div class="letter-area">
+                    <button id="shuffle-btn" class="secondary-btn">
+                        🔀 Shuffle
+                    </button>
+
+                    <div id="letter-wheel"
+                         class="letter-wheel"
+                         aria-label="Available letters">
+                    </div>
+
+                    <button id="hint-btn" class="secondary-btn">
+                        💡 Hint (2 letters)
+                        <small>-2 points</small>
+                    </button>
+                </div>
+
+                <!-- GAME CONTROLS -->
+                <div class="game-controls">
+                    <button id="clear-btn" class="clear-btn">
+                        ✕ Clear
+                    </button>
+
+                    <button id="submit-btn" class="submit-btn">
+                        ✓ Submit
+                    </button>
+                </div>
+
+                <div id="feedback"
+                     class="feedback"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+                <button id="next-btn" class="next-btn" hidden>
+                    Next Question →
+                </button>
+
+            </div>
+        </section> 
+              <!-- RULES PAGE -->
+        <section id="rules-page" class="page info-page" hidden>
+            <h2>Game Rules</h2>
+            <p>Read the clue and arrange the letters to find the word.</p>
+            <ul>
+                <li>Select letters in the correct order.</li>
+                <li>Submit your answer to check it.</li>
+                <li>Each incorrect answer counts as one mistake.</li>
+                <li>Four mistakes automatically skip the question.</li>
+                <li>Correct answers earn points.</li>
+                <li>A hint reveals two letters and costs 2 points.</li>
+                <li>You can use one hint per question.</li>
+            </ul>
+            <button class="back-btn">← Back to Game</button>
+        </section>
+
+        <!-- GUIDELINES PAGE -->
+        <section id="guidelines-page" class="page info-page" hidden>
+            <h2>Guidelines</h2>
+            <p>Read each clue carefully before answering.</p>
+            <ul>
+                <li>Check the number of answer boxes.</li>
+                <li>Use Shuffle if the letters confuse you.</li>
+                <li>Use hints wisely.</li>
+                <li>Four incorrect attempts skip a question.</li>
+            </ul>
+            <button class="back-btn">← Back to Game</button>
+        </section>
+
+        <!-- HOW TO PLAY PAGE -->
+        <section id="tutorial-page" class="page info-page" hidden>
+            <h2>How to Play</h2>
+
+            <div class="tutorial-step">
+                <h3>1. Read the clue 💡</h3>
+                <p>The clue helps you identify the hidden word.</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3>2. Select the letters 🔤</h3>
+                <p>Tap letters on the wheel in the correct order.</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3>3. Use hints</h3>
+                <p>Reveal two letters for a deduction of 2 points.</p>
+            </div>
+
+            <div class="tutorial-step">
+                <h3>4. Submit your answer 🏆</h3>
+                <p>Correct answers earn points. Four mistakes skip a question.</p>
+            </div>
+
+            <button class="back-btn">← Back to Game</button>
+        </section>
+
+        <!-- RESULTS PAGE -->
+        <section id="results-page" class="page info-page" hidden>
+            <h2>Game Complete!</h2>
+
+            <p>Your final score:
+                <strong id="final-score">0</strong>
+            </p>
+
+            <p>Correct answers:
+                <strong id="correct-count">0</strong>
+            </p>
+
+            <p>Questions skipped:
+                <strong id="skipped-count">0</strong>
+            </p>
+
+            <button id="play-again-btn" class="submit-btn">
+                ↻ Play Again
+            </button>
+
+            <button id="home-btn" class="back-btn">
+                ← Home
+            </button>
+        </section> 
+          </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
