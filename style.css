@@ -1,0 +1,534 @@
+/* ===== 1. GLOBAL DESIGN ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cream: #f8f5ed;
+    --gold: #c49a45;
+    --dark-gold: #96702d;
+    --white: #ffffff;
+    --text: #292720;
+    --muted: #817d72;
+    --border: #e8e0d0;
+    --green: #39835c;
+    --red: #c94c4c;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ===== 2. MAIN LAYOUT ===== */
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== 3. SIDEBAR ===== */
+
+.sidebar {
+    width: 245px;
+    min-height: 100vh;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.brand h1 {
+    color: var(--dark-gold);
+    font-size: 30px;
+    letter-spacing: 4px;
+    font-weight: 800;
+}
+
+.brand p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    text-align: left;
+    background: transparent;
+    color: var(--text);
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: #f5ecd9;
+    color: var(--dark-gold);
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 35px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ===== 4. MAIN CONTENT ===== */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 28px 35px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.stat span {
+    color: var(--dark-gold);
+    font-weight: 800;
+}
+
+.icon-btn {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+} 
+
+/* ===== 5. GAME PAGE ===== */
+
+.page {
+    width: 100%;
+}
+
+.game-card {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 35px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(70, 55, 25, 0.06);
+}
+
+.level {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.level span {
+    color: var(--dark-gold);
+    font-weight: 800;
+}
+
+/* ===== 6. CLUE CARD ===== */
+
+.hint-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #faf6eb;
+    border: 1px solid #eee2c8;
+    border-radius: 16px;
+    margin-bottom: 35px;
+}
+
+.hint-icon {
+    font-size: 30px;
+}
+
+.hint-card strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--dark-gold);
+}
+
+.hint-card p {
+    line-height: 1.5;
+}
+
+/* ===== 7. ANSWER BOXES ===== */
+
+.answer-boxes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    min-height: 58px;
+    margin: 25px 0 35px;
+}
+
+.answer-box {
+    width: 43px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: #fffdf8;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.answer-box.filled {
+    border-color: var(--gold);
+    background: #faf3e2;
+}
+
+.answer-box.correct {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.answer-box.wrong {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+/* ===== 8. LETTER WHEEL AREA ===== */
+
+.letter-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin: 20px 0 30px;
+}
+
+.letter-wheel {
+    width: 280px;
+    height: 280px;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #ead8b2;
+    background: radial-gradient(
+        circle,
+        #fffdf8 0%,
+        #f7edda 100%
+    );
+    box-shadow: inset 0 0 25px rgba(196, 154, 69, 0.10);
+}
+
+/* JavaScript positions the letter buttons */
+
+.letter-btn {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--gold);
+    color: var(--text);
+    font-size: 22px;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(70, 55, 25, 0.10);
+    transform: translate(-50%, -50%);
+}
+
+.letter-btn:hover {
+    background: var(--gold);
+    color: white;
+}
+
+.letter-btn.selected {
+    background: var(--dark-gold);
+    color: white;
+    border-color: var(--dark-gold);
+}
+
+.letter-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: translate(-50%, -50%);
+}
+
+/* ===== 9. SECONDARY BUTTONS ===== */
+
+.secondary-btn {
+    padding: 12px 18px;
+    background: #f7f1e5;
+    color: var(--dark-gold);
+    border: 1px solid #ead8b2;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.secondary-btn small {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+} 
+/* ===== 10. GAME CONTROLS ===== */
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.clear-btn,
+.submit-btn,
+.next-btn,
+.back-btn {
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.clear-btn {
+    background: #f3f0e9;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.submit-btn {
+    background: var(--gold);
+    color: white;
+}
+
+.submit-btn:hover {
+    background: var(--dark-gold);
+}
+
+.next-btn {
+    display: block;
+    margin: 20px auto 0;
+    background: var(--green);
+    color: white;
+}
+
+.back-btn {
+    margin-top: 20px;
+    background: #f5ecd9;
+    color: var(--dark-gold);
+}
+
+/* ===== 11. FEEDBACK ===== */
+
+.feedback {
+    text-align: center;
+    min-height: 25px;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.feedback.success {
+    color: var(--green);
+}
+
+.feedback.error {
+    color: var(--red);
+}
+
+/* ===== 12. INFORMATION PAGES ===== */
+
+.info-page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 35px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(70, 55, 25, 0.06);
+}
+
+.info-page h2 {
+    color: var(--dark-gold);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.info-page p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.info-page ul {
+    padding-left: 22px;
+    line-height: 2;
+}
+
+.tutorial-step {
+    padding: 18px;
+    margin: 15px 0;
+    background: #faf6eb;
+    border-radius: 14px;
+}
+
+.tutorial-step h3 {
+    margin-bottom: 8px;
+    color: var(--dark-gold);
+}
+
+.tutorial-step p {
+    margin-bottom: 0;
+}
+
+/* ===== 13. RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 18px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        margin-bottom: 20px;
+    }
+
+    .brand h1 {
+        font-size: 25px;
+    }
+
+    .navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .nav-btn {
+        width: auto;
+        padding: 10px;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        padding: 18px 12px;
+    }
+
+    .topbar {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .stat {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .game-card,
+    .info-page {
+        padding: 20px 14px;
+        border-radius: 18px;
+    }
+
+    .letter-wheel {
+        width: 250px;
+        height: 250px;
+    }
+
+    .letter-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 19px;
+    }
+
+    .answer-box {
+        width: 35px;
+        height: 43px;
+        font-size: 18px;
+    }
+
+    .game-controls {
+        gap: 10px;
+    }
+
+    .clear-btn,
+    .submit-btn {
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-btn {
+        font-size: 12px;
+        padding: 9px 7px;
+    }
+
+    .letter-wheel {
+        width: 220px;
+        height: 220px;
+    }
+
+    .answer-box {
+        width: 30px;
+        height: 38px;
+    }
+}
